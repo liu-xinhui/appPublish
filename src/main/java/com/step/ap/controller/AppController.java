@@ -16,15 +16,15 @@ import java.util.List;
 @Api("应用")
 @AllArgsConstructor
 @RestController
-@RequestMapping("app")
+@RequestMapping("apps")
 public class AppController {
 
     private final AppService appService;
 
     @ApiOperation("获取所有应用")
     @GetMapping
-    public List<App> selectWithPage() {
-        return appService.list();
+    public List<AppVo> getList() {
+        return appService.getList();
     }
 
     @ApiOperation("获取单个数据")

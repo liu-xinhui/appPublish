@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 服务类
@@ -27,8 +28,21 @@ public class AppService extends BaseService<App> {
     private final AppVersionService appVersionService;
     private final FileSystemStorageService storageService;
 
+    public List<AppVo> getList() {
+        List<App> list = super.list(new LambdaQueryWrapper<App>().orderByDesc(App::getId));
+        return list.stream().map(app -> {
+            AppVo appVo = app.toBean(AppVo.class);
+            AppVersion appVersion = appVersionService.getById(app.getCurrentVersionId());
+            appVo.setCurrentVersion(appVersion);
+            return appVo;
+        }).collect(Collectors.toList());
+    }
+
     public AppVo selectById(int id) {
         App app = super.getById(id);
+        if (app == null) {
+            throw new MyException("未找到该app");
+        }
         List<AppVersion> appVersions = appVersionService.selectByApp(id);
         AppVo appVo = app.toBean(AppVo.class);
         appVo.setVersions(appVersions);
@@ -59,8 +73,6 @@ public class AppService extends BaseService<App> {
         appVersionService.save(appVersion);
         //更新app中currentId
         app.setCurrentVersionId(appVersion.getId());
-        app.setCurrentVersionCode(appVersion.getVersionCode());
-        app.setCurrentVersionName(appVersion.getVersionName());
         super.updateById(app);
         storageService.store(file);
     }

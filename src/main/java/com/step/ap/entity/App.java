@@ -27,10 +27,4 @@ public class App extends BaseLogEntity {
 
     @ApiModelProperty("当前的版本id")
     private Integer currentVersionId;
-
-    @ApiModelProperty("当前的版本code")
-    private Integer currentVersionCode;
-
-    @ApiModelProperty("当前的版本name")
-    private String currentVersionName;
 }

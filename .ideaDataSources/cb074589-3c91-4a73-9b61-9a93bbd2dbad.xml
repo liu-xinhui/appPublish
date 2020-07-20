@@ -929,88 +929,76 @@
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="289" parent="281" name="currentVersionCode">
+    <column id="289" parent="281" name="createTime">
       <Position>7</Position>
-      <Comment>冗余字段</Comment>
-      <DataType>int(11)|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="281" name="currentVersionName">
+    <column id="290" parent="281" name="updateTime">
       <Position>8</Position>
-      <Comment>冗余字段</Comment>
-      <DataType>varchar(50)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="291" parent="281" name="createTime">
-      <Position>9</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="281" name="updateTime">
-      <Position>10</Position>
-      <DataType>datetime|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <key id="293" parent="281" name="PRIMARY">
+    <key id="291" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="294" parent="282" name="id">
+    <column id="292" parent="282" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="282" name="appId">
+    <column id="293" parent="282" name="appId">
       <Position>2</Position>
       <Comment>所属程序</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="282" name="name">
+    <column id="294" parent="282" name="name">
       <Position>3</Position>
       <Comment>应用名称</Comment>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="282" name="versionName">
+    <column id="295" parent="282" name="versionName">
       <Position>4</Position>
       <Comment>版本</Comment>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="282" name="versionCode">
+    <column id="296" parent="282" name="versionCode">
       <Position>5</Position>
       <Comment>构建版本</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="282" name="size">
+    <column id="297" parent="282" name="size">
       <Position>6</Position>
       <Comment>包大小，单位kb</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="282" name="icon">
+    <column id="298" parent="282" name="icon">
       <Position>7</Position>
       <Comment>应用图标，base64</Comment>
       <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="282" name="changeLog">
+    <column id="299" parent="282" name="changeLog">
       <Position>8</Position>
       <Comment>更新日志</Comment>
       <DataType>varchar(1000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="282" name="createTime">
+    <column id="300" parent="282" name="createTime">
       <Position>9</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="303" parent="282" name="PRIMARY">
+    <key id="301" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

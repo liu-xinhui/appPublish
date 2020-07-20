@@ -40,7 +40,7 @@ public class AuthAspect {
         }
     }
 
-    @Around("execution(* com.step.ap.controller..*.*(..)) && !@annotation(com.step.ap.config.annotation.NoAuth)")
+    //@Around("execution(* com.step.ap.controller..*.*(..)) && !@annotation(com.step.ap.config.annotation.NoAuth)")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = Objects.requireNonNull(attributes).getRequest();
