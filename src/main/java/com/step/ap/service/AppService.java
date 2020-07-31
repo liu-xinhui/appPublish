@@ -67,13 +67,23 @@ public class AppService extends BaseService<App> {
             super.save(app);
         }
         //新增版本
+        String filename = String.format("%s@%s_%s.apk", appUploadVo.getName(), appUploadVo.getVersionName(), RandomStringUtils.randomAlphabetic(5));
         AppVersion appVersion = appUploadVo.toBean(AppVersion.class);
         appVersion.setAppId(app.getId());
         appVersion.setSize(file.getSize() / 1024);
+        appVersion.setDownloadUrl(filename);
         appVersionService.save(appVersion);
         //更新app中currentId
         app.setCurrentVersionId(appVersion.getId());
         super.updateById(app);
-        storageService.store(file);
+        storageService.store(file, filename);
+    }
+
+    public AppVo selectByShortCode(String shortCode) {
+        App app = super.getOne(new LambdaQueryWrapper<App>().eq(App::getShortCode, shortCode));
+        AppVo appVo = app.toBean(AppVo.class);
+        AppVersion appVersion = appVersionService.getById(app.getCurrentVersionId());
+        appVo.setCurrentVersion(appVersion);
+        return appVo;
     }
 }

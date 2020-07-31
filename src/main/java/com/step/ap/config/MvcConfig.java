@@ -12,10 +12,14 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -45,6 +49,16 @@ public class MvcConfig implements WebMvcConfigurer {
                 .allowedHeaders("*");
     }
 
+    /**
+     * 支持前端路由的 history 模式
+     */
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webServerFactoryCustomizer() {
+        return factory -> {
+            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/index.html");
+            factory.addErrorPages(error404Page);
+        };
+    }
 
     /**
      * get方法接收日期类型的参数

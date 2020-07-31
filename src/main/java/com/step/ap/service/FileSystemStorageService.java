@@ -28,6 +28,10 @@ public class FileSystemStorageService {
 
     public void store(MultipartFile file) {
         String filename = file.getOriginalFilename();
+        store(file, filename);
+    }
+
+    public void store(MultipartFile file, String filename) {
         if (StringUtils.isEmpty(filename)) {
             throw new RuntimeException("Filename should not null");
         }

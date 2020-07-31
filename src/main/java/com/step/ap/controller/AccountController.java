@@ -19,7 +19,7 @@ import java.util.Map;
 @Api(tags = "认证")
 @AllArgsConstructor
 @RestController
-@RequestMapping("account")
+@RequestMapping("api/account")
 public class AccountController {
     private final AppConfig config;
 

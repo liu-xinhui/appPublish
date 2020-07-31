@@ -18,6 +18,9 @@ import java.util.List;
 public class AppVersionService extends BaseService<AppVersion> {
 
     public List<AppVersion> selectByApp(Integer appId) {
-        return super.list(new LambdaQueryWrapper<AppVersion>().eq(AppVersion::getAppId, appId));
+        return super.list(new LambdaQueryWrapper<AppVersion>()
+                .eq(AppVersion::getAppId, appId)
+                .orderByDesc(AppVersion::getCreateTime)
+        );
     }
 }

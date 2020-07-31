@@ -36,6 +36,9 @@ public class AppVersion extends BaseEntity {
     @ApiModelProperty("图标")
     private String icon;
 
+    @ApiModelProperty("下载链接")
+    private String downloadUrl;
+
     @ApiModelProperty("更新日志")
     private String changeLog;
 
