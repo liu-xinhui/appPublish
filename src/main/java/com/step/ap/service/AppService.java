@@ -81,6 +81,9 @@ public class AppService extends BaseService<App> {
 
     public AppVo selectByShortCode(String shortCode) {
         App app = super.getOne(new LambdaQueryWrapper<App>().eq(App::getShortCode, shortCode));
+        if ((app == null)) {
+            throw new MyException("该app不存在");
+        }
         AppVo appVo = app.toBean(AppVo.class);
         AppVersion appVersion = appVersionService.getById(app.getCurrentVersionId());
         appVo.setCurrentVersion(appVersion);
