@@ -6,6 +6,9 @@ var vueEnv = {
   dev: {
     serverUrl: "http://127.0.0.1:8060/api/",
   },
+  test: {
+    serverUrl: "http://118.25.44.86:8556/api/",
+  },
   prod: {
     serverUrl: "/",
   },
@@ -14,6 +17,9 @@ var vueEnv = {
 switch (vueEnv.active) {
   case "dev":
     window.config = vueEnv.dev;
+    break;
+  case "test":
+    window.config = vueEnv.test;
     break;
   default:
     window.config = vueEnv.prod;
