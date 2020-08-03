@@ -40,6 +40,7 @@ public class AppController {
         return appService.selectById(id);
     }
 
+    @NoAuth
     @ApiOperation("根据shortCode获取详情")
     @GetMapping("shortCode/{shortCode}")
     public AppVo selectByShortCode(@PathVariable String shortCode) {
