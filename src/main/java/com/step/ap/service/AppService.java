@@ -29,7 +29,7 @@ public class AppService extends BaseService<App> {
     private final FileSystemStorageService storageService;
 
     public List<AppVo> getList() {
-        List<App> list = super.list(new LambdaQueryWrapper<App>().orderByDesc(App::getId));
+        List<App> list = super.list(new LambdaQueryWrapper<App>().orderByDesc(App::getUpdateTime));
         return list.stream().map(app -> {
             AppVo appVo = app.toBean(AppVo.class);
             AppVersion appVersion = appVersionService.getById(app.getCurrentVersionId());
@@ -46,6 +46,8 @@ public class AppService extends BaseService<App> {
         List<AppVersion> appVersions = appVersionService.selectByApp(id);
         AppVo appVo = app.toBean(AppVo.class);
         appVo.setVersions(appVersions);
+        int downloadCount = appVersions.stream().mapToInt(AppVersion::getDownloadCount).sum();
+        appVo.setDownloadCount(downloadCount);
         return appVo;
     }
 

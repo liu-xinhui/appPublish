@@ -1007,18 +1007,24 @@
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="282" name="changeLog">
+    <column id="303" parent="282" name="downloadCount">
       <Position>9</Position>
+      <Comment>下载次数</Comment>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="304" parent="282" name="changeLog">
+      <Position>10</Position>
       <Comment>更新日志</Comment>
       <DataType>varchar(1000)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="282" name="createTime">
-      <Position>10</Position>
+    <column id="305" parent="282" name="createTime">
+      <Position>11</Position>
       <DataType>datetime|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="305" parent="282" name="PRIMARY">
+    <key id="306" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

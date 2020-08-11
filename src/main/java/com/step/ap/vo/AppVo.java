@@ -12,4 +12,5 @@ import java.util.List;
 public class AppVo extends App {
     private AppVersion currentVersion;
     private List<AppVersion> versions;
+    private int downloadCount;
 }
