@@ -903,18 +903,21 @@
       <Position>2</Position>
       <Comment>应用名称</Comment>
       <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="285" parent="281" name="packageName">
       <Position>3</Position>
       <Comment>包名</Comment>
       <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="286" parent="281" name="shortCode">
       <Position>4</Position>
       <Comment>短链接码</Comment>
       <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="287" parent="281" name="description">
@@ -970,24 +973,28 @@
       <Position>2</Position>
       <Comment>所属程序</Comment>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="297" parent="282" name="name">
       <Position>3</Position>
       <Comment>应用名称</Comment>
       <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="298" parent="282" name="versionName">
       <Position>4</Position>
       <Comment>版本</Comment>
       <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="299" parent="282" name="versionCode">
       <Position>5</Position>
       <Comment>构建版本</Comment>
       <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="300" parent="282" name="size">
@@ -1005,6 +1012,7 @@
     <column id="302" parent="282" name="downloadUrl">
       <Position>8</Position>
       <DataType>varchar(100)|0s</DataType>
+      <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="303" parent="282" name="downloadCount">
