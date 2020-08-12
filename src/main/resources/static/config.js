@@ -10,7 +10,7 @@ var vueEnv = {
     serverUrl: "http://118.25.44.86:8556/api/",
   },
   prod: {
-    serverUrl: "/",
+    serverUrl: "/api/",
   },
 };
 
