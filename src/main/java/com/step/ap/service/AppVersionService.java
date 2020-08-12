@@ -35,7 +35,7 @@ public class AppVersionService extends BaseService<AppVersion> {
         AppVersion appVersion = super.getById(versionId);
         String filename = appVersion.getDownloadUrl();
         String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
-        Resource file = resourceLoader.getResource("file:" + Paths.get("uploadFiles", filename));
+        Resource file = resourceLoader.getResource("file:" + Paths.get(FileSystemStorageService.FILE_PATH, filename));
         //保存下载次数
         AppVersion appVersionNew = new AppVersion();
         appVersionNew.setId(appVersion.getId());

@@ -17,12 +17,13 @@ import java.nio.file.StandardCopyOption;
 
 @Service
 public class FileSystemStorageService {
+    public static final String FILE_PATH = "ap/uploadFiles";
 
     private final Path rootLocation;
 
     @Autowired
     public FileSystemStorageService() {
-        this.rootLocation = Paths.get("uploadFiles");
+        this.rootLocation = Paths.get(FILE_PATH);
         this.init();
     }
 
