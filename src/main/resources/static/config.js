@@ -1,13 +1,13 @@
 /*全局配置文件，url类型的必须以"/"结尾*/
 var vueEnv = {
   //当前激活的环境
-  active: "dev",
+  active: "prod",
   //开发环境
   dev: {
     serverUrl: "http://127.0.0.1:8060/api/",
   },
   test: {
-    serverUrl: "http://118.25.44.86:8556/api/",
+    serverUrl: "http://127.0.0.1:8060/api/",
   },
   prod: {
     serverUrl: "/api/",
