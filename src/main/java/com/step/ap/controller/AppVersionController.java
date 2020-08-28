@@ -5,16 +5,21 @@ import com.step.ap.entity.App;
 import com.step.ap.entity.AppVersion;
 import com.step.ap.service.AppService;
 import com.step.ap.service.AppVersionService;
+import com.step.ap.service.FileSystemStorageService;
 import com.step.ap.vo.AppUploadVo;
 import com.step.ap.vo.AppVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Api("应用版本")
@@ -23,6 +28,7 @@ import java.util.List;
 @RequestMapping("api/appVersions")
 public class AppVersionController {
     private final AppVersionService appVersionService;
+    private final ResourceLoader resourceLoader;
 
     @ApiOperation("编辑")
     @PutMapping
@@ -41,5 +47,14 @@ public class AppVersionController {
     @GetMapping("downloadApk/{versionId}")
     public ResponseEntity<Resource> downloadApk(@PathVariable Integer versionId) {
         return appVersionService.downloadApk(versionId);
+    }
+
+    @NoAuth
+    @ApiOperation("apk下载")
+    @GetMapping("downloadApk2/{filename:.+}")
+    public ResponseEntity<Resource> downloadApk2(@PathVariable String filename) {
+        String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        Resource file = resourceLoader.getResource("file:" + Paths.get(FileSystemStorageService.FILE_PATH, filename));
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileNameEncode + "\"").body(file);
     }
 }
