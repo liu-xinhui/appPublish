@@ -28,7 +28,6 @@ import java.util.List;
 @RequestMapping("api/appVersions")
 public class AppVersionController {
     private final AppVersionService appVersionService;
-    private final ResourceLoader resourceLoader;
 
     @ApiOperation("编辑")
     @PutMapping
@@ -47,14 +46,5 @@ public class AppVersionController {
     @GetMapping("downloadApk/{versionId}")
     public ResponseEntity<Resource> downloadApk(@PathVariable Integer versionId) {
         return appVersionService.downloadApk(versionId);
-    }
-
-    @NoAuth
-    @ApiOperation("apk下载")
-    @GetMapping("downloadApk2/{filename:.+}")
-    public ResponseEntity<Resource> downloadApk2(@PathVariable String filename) {
-        String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
-        Resource file = resourceLoader.getResource("file:" + Paths.get(FileSystemStorageService.FILE_PATH, filename));
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileNameEncode + "\"").body(file);
     }
 }
