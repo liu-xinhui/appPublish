@@ -1,26 +1,22 @@
 package com.step.ap.controller;
 
 import com.step.ap.config.annotation.NoAuth;
-import com.step.ap.entity.App;
 import com.step.ap.entity.AppVersion;
-import com.step.ap.service.AppService;
 import com.step.ap.service.AppVersionService;
 import com.step.ap.service.FileSystemStorageService;
-import com.step.ap.vo.AppUploadVo;
-import com.step.ap.vo.AppVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-import java.util.List;
 
 @Api("应用版本")
 @AllArgsConstructor
@@ -56,5 +52,17 @@ public class AppVersionController {
         String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
         Resource file = resourceLoader.getResource("file:" + Paths.get(FileSystemStorageService.FILE_PATH, filename));
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileNameEncode + "\"").body(file);
+    }
+
+    @NoAuth
+    @ApiOperation("apk下载")
+    @GetMapping("downloadApk3/{filename:.+}")
+    public ResponseEntity<Resource> downloadApk3(@PathVariable String filename) {
+        String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
+        FileSystemResource file = new FileSystemResource(Paths.get(FileSystemStorageService.FILE_PATH, filename));
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileNameEncode)
+                .header(HttpHeaders.CONTENT_TYPE,"application/vnd.android.package-archive")
+                .body(file);
     }
 }
