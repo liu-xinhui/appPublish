@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.step.ap.base.BaseService;
 import com.step.ap.entity.AppVersion;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpHeaders;
@@ -22,7 +23,6 @@ import java.util.List;
 @Transactional
 @AllArgsConstructor
 public class AppVersionService extends BaseService<AppVersion> {
-    private final ResourceLoader resourceLoader;
 
     public List<AppVersion> selectByApp(Integer appId) {
         return super.list(new LambdaQueryWrapper<AppVersion>()
@@ -35,12 +35,15 @@ public class AppVersionService extends BaseService<AppVersion> {
         AppVersion appVersion = super.getById(versionId);
         String filename = appVersion.getDownloadUrl();
         String fileNameEncode = new String(filename.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
-        Resource file = resourceLoader.getResource("file:" + Paths.get(FileSystemStorageService.FILE_PATH, filename));
+        FileSystemResource file = new FileSystemResource(Paths.get(FileSystemStorageService.FILE_PATH, filename));
         //保存下载次数
         AppVersion appVersionNew = new AppVersion();
         appVersionNew.setId(appVersion.getId());
         appVersionNew.setDownloadCount(appVersion.getDownloadCount() + 1);
         super.updateById(appVersionNew);
-        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileNameEncode + "\"").body(file);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + fileNameEncode)
+                .header(HttpHeaders.CONTENT_TYPE,"application/vnd.android.package-archive")
+                .body(file);
     }
 }
