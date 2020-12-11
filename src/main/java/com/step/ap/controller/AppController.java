@@ -9,8 +9,6 @@ import com.step.ap.vo.AppVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
-import org.springframework.core.io.Resource;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -59,5 +57,12 @@ public class AppController {
     @PostMapping("upload")
     public void uploadApk(AppUploadVo appUploadVo, @RequestParam MultipartFile file) {
         appService.uploadApk(appUploadVo, file);
+    }
+
+    @NoAuth
+    @ApiOperation("根据包名获取最新版本")
+    @GetMapping("latest/{packageName}")
+    public AppVersion selectLatestByPackageName(@PathVariable String packageName) {
+        return appService.selectLatestByPackageName(packageName);
     }
 }

@@ -55,6 +55,14 @@ public class AppService extends BaseService<App> {
         return super.getOne(new LambdaQueryWrapper<App>().eq(App::getPackageName, packageName));
     }
 
+    public AppVersion selectLatestByPackageName(String packageName) {
+        App app = selectByPackageName(packageName);
+        AppVersion appVersion = appVersionService.getById(app.getCurrentVersionId());
+        appVersion.setIcon(null);
+        appVersion.setDownloadUrl("appVersions/downloadApk/" + app.getCurrentVersionId());
+        return appVersion;
+    }
+
     public void uploadApk(AppUploadVo appUploadVo, MultipartFile file) {
         if (!ObjectUtils.allNotNull(appUploadVo.getPackageName(), appUploadVo.getName(), appUploadVo.getVersionName(), appUploadVo.getVersionCode())) {
             throw new MyException("应用名、包名、版本不能为空");
